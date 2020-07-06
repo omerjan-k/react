@@ -1,52 +1,70 @@
 import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 
 
     
-    function DishDetail ({dish}) {
+function DishDetail(props) {
         
         
 
-        if(dish != null) {
-            return (
-                <div className="container">
+    if (props.dish != null) {
+        return (
+
+            <div className="container">
+
+                <div className="row">
+
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/menu">Menu</Link> </BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+
+                    <div className="col-12">
+                        <h3>{props.dish.name}</h3>
+                        <hr />
+                    </div>
+
+                </div>
                     
-                    <div className="row">
-                        <div className="col-12 col-md-5 m-1">
+                <div className="row">
+
+                    <div className="col-12 col-md-5 m-1">
                         <Card>
-                            <CardImg width="100%" src={dish.image} alt={dish.name} />
+                            <CardImg width="100%" src={props.dish.image} alt={props.dish.name} />
                             <CardBody>
-                                <CardTitle>{dish.name}</CardTitle>
-                                <CardText>{dish.description}</CardText>
+                                <CardTitle>{props.dish.name}</CardTitle>
+                                <CardText>{props.dish.description}</CardText>
                             </CardBody>
                         </Card>
-                        </div>
-                        <div className="col-12 col-md-5 m-1">
-                            <h4>Comments</h4>   
-                            {renderComments(dish.comments)}   
-                        </div>
+                    </div>
+                        
+                    <div className="col-12 col-md-5 m-1">
+                        <h4>Comments</h4>
+                        {renderComments(props.comments)}
+                    </div>
 
-                     </div>    
-                    
                 </div>
-            )
-        } else {
-            return(<div></div>)
-        }
+                    
+            </div>
+        );
+
+    } else {
+        return <div></div>;
     }
 
-function renderComments(comments) {
-        
-    if (comments != null) {
+    function renderComments(comments) {
             
-            const listItems = comments.map((comment)=>{
-                return(
-                    <div key={comment.id}>
-                        
+        if (comments != null) {
+                
+             const listItems = comments.map((comment) => {
+                return (
+                    <div >
+                            
                         <ul className="list-unstyled">
-                        
-                            <li>   
+                            
+                            <li>
                                 {comment.comment}
                             </li>
 
@@ -55,24 +73,31 @@ function renderComments(comments) {
                                 year: 'numeric',
                                 month: 'long',
                                 day: '2-digit'
-                                }).format(new Date(comment.date))}
-                            </li>  
+                            }).format(new Date(comment.date))}
+                            </li>
 
-                            
-                        </ul>    
+                                
+                        </ul>
                     </div>
 
                 )
-            })
+             });
 
-            return (listItems)
-            
-        } else {
-            return(<div></div>)
+                 return (listItems)
+                
+            } else {
+                return(<div></div>)
+            }
         }
-    }
 
+
+}
+
+      
+
+
+    
 
      
 
-export default DishDetail
+export default DishDetail;
