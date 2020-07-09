@@ -1,17 +1,17 @@
 import React from 'react';
 import {
-    Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, CardImg, CardTitle, CardText,
+    Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, 
     Media
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
-        return (
-            <p>Leader {leader.name}</p>
-        );
-    });
+    // const leaders = props.leaders.map((leader) => {
+    //     return (
+    //         <p>Leader {leader.name}</p>
+    //     );
+    // });
 
     return(
         <div className="container">
